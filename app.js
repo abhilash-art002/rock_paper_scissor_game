@@ -6,11 +6,65 @@ const msg = document.querySelector("#msg")
 const userScorePara = document.querySelector("#user-score");
 const compScorePara = document.querySelector("#comp-score");
 
-const genCompChoise = ()=>{
+const genCompChoise = (userChoice)=>{
   const option = ["rock","paper","scissor"];
   const randIdx= Math.floor(Math.random()*3);
+  compResponseImage(option,randIdx,userChoice);
   return option[randIdx];
 }
+
+const compResponseImage = (option, randIdx, userChoice) => {
+  const compChoice = option[randIdx];
+  console.log("Computer chose:", compChoice);
+
+  const isDraw = userChoice === compChoice;
+
+  document.querySelectorAll(".choice").forEach(choice => {
+    const id = choice.getAttribute("id");
+    const img = choice.querySelector("img");
+    const span = choice.querySelector("span");
+
+    // Reset previous styles/text
+    img.classList.remove("highlight");
+    span.innerText = id;
+
+    if (id === userChoice || id === compChoice) {
+      choice.classList.add("active-choice");
+      choice.classList.remove("dimmed-choice");
+
+      if (isDraw && id === userChoice) {
+        span.innerText = "Draw";
+        img.classList.add("highlight");
+      } else {
+        if (id === userChoice) {
+          span.innerText = "User";
+        }
+        if (id === compChoice) {
+          span.innerText = "Comp";
+          img.classList.add("highlight");
+        }
+      }
+
+    } else {
+      choice.classList.add("dimmed-choice");
+      choice.classList.remove("active-choice");
+    }
+  });
+
+  // Reset everything after 2 seconds
+  setTimeout(() => {
+    document.querySelectorAll(".choice").forEach(choice => {
+      const id = choice.getAttribute("id");
+      const img = choice.querySelector("img");
+      const span = choice.querySelector("span");
+
+      img.classList.remove("highlight");
+      choice.classList.remove("dimmed-choice", "active-choice");
+      span.innerText = id;
+    });
+  }, 2000);
+};
+
 const drawGame = ()=>{
   console.log("game was draw");
   msg.innerText = " Game was draw. play again!" 
@@ -35,7 +89,7 @@ const showWinner = (userwin,userChoice,compChoise) =>{
 const playGame = (userChoice)=>{
   console.log("user choise = ",userChoice);
   //generate comp choise
-  const compChoise =genCompChoise();
+  const compChoise =genCompChoise(userChoice);
   console.log("comp choise = ",compChoise);
 
 
