@@ -15,9 +15,14 @@ h1{
 .heading_container{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  padding: 0 2rem;
   margin-top: 2rem;
   margin-bottom: 5rem;
+}
+.heading_container>div{
+  margin-left: 9rem;
+  
 }
 
 .image_container{
@@ -69,6 +74,28 @@ h1{
   padding: 1rem;
   border-radius: 1rem;
 }
+
+.reset-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#reset-btn {
+  padding: 0.8rem 2rem; 
+  font-size: 3rem;
+  font-weight: bold;
+  border: none;
+  background-color: #a78bfa; /* similar to your purple theme */
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+#reset-btn:hover {
+  background-color: #7c3aed;
+}
+
 @media (max-width: 768px) {
   .heading_container h1 {
     font-size: 2rem;
