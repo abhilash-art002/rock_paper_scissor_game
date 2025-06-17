@@ -63,7 +63,14 @@ choices.forEach((choice) => {
   });
 });
 
-
+document.querySelector("#reset-btn").addEventListener("click", () => {
+  userScore = 0;
+  compScore = 0;
+  userScorePara.innerText = userScore;
+  compScorePara.innerText = compScore;
+  msg.innerText = "Start playing!";
+  msg.style.backgroundColor = "rgb(196 181 253)";
+});
 
 
 
